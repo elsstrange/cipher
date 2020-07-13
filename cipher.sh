@@ -13,4 +13,4 @@ fi
 
 #echo $destination_file
 
-#./cipher.rb "$@" > "$destination_file"
+./use_cipher.rb "$@" > "$destination_file"

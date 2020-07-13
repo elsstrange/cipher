@@ -21,13 +21,11 @@ if ARGV[0] == "ln"
     end
     codebook = Cipher::Codebook.new('character_set_ln.txt').codebook
     cipher = Cipher::LetterNumber.new(char_set: codebook, key: key)
-    puts "prep ln codebook"
     
 elsif ARGV[0] == "ll"
     # If LetterLetter specified, generate a LetterLetter cipher. No key is required.
     codebook = Cipher::Codebook.new('character_set_ll.txt').codebook
     cipher = Cipher::LetterLetter.new(char_set: codebook)
-    puts "prep ll codebook"
 
 else
     # Exit program if it is unclear which cipher to use.
@@ -38,11 +36,9 @@ end
 # Run encrypt / decrypt
 
 if ARGV[1] == "enc"
-    puts "encrypting"
     plain_text = File.readlines(ARGV[2], encoding:"UTF-8", chomp: true) # Should probably add some error handling for not being able to find the file!
     plain_text.map {|line| puts cipher.encrypt(line)}
 elsif ARGV[1] == "dec"
-    puts "decrypting"
     cipher_text = File.readlines(ARGV[2], encoding:"UTF-8", chomp: true) # Should probably add some error handling for not being able to find the file!
     cipher_text.map {|line| puts cipher.decrypt(line)}
 else

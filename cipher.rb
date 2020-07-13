@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 module Cipher
   # Methods that are common to the different Cipher classes below. In the wild, these functions might be saved in a separate module to the classes that include them.
   
