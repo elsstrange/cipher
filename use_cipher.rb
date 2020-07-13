@@ -20,4 +20,12 @@ else
 end
 
 
+# Run encrypt / decrypt
 
+if ARGV[1] == "enc"
+    puts "encrypting"
+elsif ARGV[1] == "dec"
+    puts "decrypting"
+else
+    puts "Unclear method request. #{instructions}"
+end
