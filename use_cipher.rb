@@ -39,8 +39,12 @@ end
 
 if ARGV[1] == "enc"
     puts "encrypting"
+    plain_text = File.readlines(ARGV[2], encoding:"UTF-8", chomp: true) # Should probably add some error handling for not being able to find the file!
+    plain_text.map {|line| puts cipher.encrypt(line)}
 elsif ARGV[1] == "dec"
     puts "decrypting"
+    cipher_text = File.readlines(ARGV[2], encoding:"UTF-8", chomp: true) # Should probably add some error handling for not being able to find the file!
+    cipher_text.map {|line| puts cipher.decrypt(line)}
 else
     abort("Unclear method request. #{instructions}")
 end
