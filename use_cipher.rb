@@ -7,16 +7,31 @@ instructions = "Provide cipher (ln/ll), method (enc/dec), file and an optional k
 
 
 if ARGV.length < 3
-    puts "Too few arguments provided. #{instructions}"
+    # Exit program if insufficient arguments have been given.
+    abort("Too few arguments provided. #{instructions}")
 end
 
-# Prepare a codebook
+# Prepare a cipher
 if ARGV[0] == "ln"
+    # If LetterNumber specified, generate a LetterNumber cipher.  If a valid key is not specified, default to 0.
+    begin
+        key = ARGV[3].to_i  
+    rescue # Consider adding some specific error handling, but defaulting to 0 also seems valid.
+        key = 0
+    end
+    codebook = Cipher::Codebook.new('character_set_ln.txt').codebook
+    cipher = Cipher::LetterNumber.new(char_set: codebook, key: key)
     puts "prep ln codebook"
+    
 elsif ARGV[0] == "ll"
+    # If LetterLetter specified, generate a LetterLetter cipher. No key is required.
+    codebook = Cipher::Codebook.new('character_set_ll.txt').codebook
+    cipher = Cipher::LetterLetter.new(char_set: codebook)
     puts "prep ll codebook"
+
 else
-    puts "Unclear cipher request. #{instructions}"
+    # Exit program if it is unclear which cipher to use.
+    abort("Unclear cipher request. #{instructions}")
 end
 
 
@@ -27,5 +42,5 @@ if ARGV[1] == "enc"
 elsif ARGV[1] == "dec"
     puts "decrypting"
 else
-    puts "Unclear method request. #{instructions}"
+    abort("Unclear method request. #{instructions}")
 end
