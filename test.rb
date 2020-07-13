@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require_relative 'cipher.rb'
 
 char_set1 = Cipher::Codebook.new('character_set_ln.txt').codebook
