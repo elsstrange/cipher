@@ -75,30 +75,5 @@ module Cipher
   end
 
 
-  class Codebook
-    # In the wild, I would probably save the Codebook class to its own module, to keep the Cipher module a bit more focused, but for tidiness of saving my practice iterations, I'm keeping it all together for now.
-    # In this current iteration, the codebook class exists solely to take a text file and produce a hash that maps strings to other strings, which can be used when ciphering.
-    # Using attr_reader means that users can't change the hash once it's made.  This seems reasonable for now - you don't want to accidentally overwrite your codebook!
-    
-    attr_reader :codebook
-    
-    def initialize(txt_file)
-      @codebook = make_codebook(txt_file)
-    end
 
-    private
-
-    def read_char_set_file(char_set_file)
-      # Reads a txt file with UTF-8 encoding and returns an array of arrays, where each array contains a plaintext character and cipher character pair as strings.
-      File.readlines(char_set_file, encoding:"UTF-8", chomp: true)
-      .map {|l| l.split(", ")}
-    end
-
-    def make_codebook(char_set_file)
-      # Converts an array of arrays (where each array is a pair of strings) into a hash, in which the plaintext character can be looked up to return the cipher character. Does not convert strings.
-      read_char_set_file(char_set_file)
-      .map {|code_pair| [code_pair[0],code_pair[1]]}
-      .to_h
-    end
-  end
 end
